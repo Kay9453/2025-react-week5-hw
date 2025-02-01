@@ -184,6 +184,7 @@ function App() {
         title: "訂單已成功送出",
       });
       reset();
+      getCart();
     } catch (error) {
       alert('結帳失敗!')
     } finally {
