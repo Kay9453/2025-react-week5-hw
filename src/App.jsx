@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
 import Swal from 'sweetalert2';
 import Toast from "./components/Toast";
+import FormatNumber from "./utils/FormatNumber";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -185,11 +186,7 @@ function App() {
       reset();
       getCart();
     } catch (error) {
-      if ( error.response.data.message === "購物車內無資料"){
-        alert('結帳失敗，請將商品加入購物車!')
-      } else {
-        alert('結帳失敗!')
-      }
+      alert('結帳失敗!')
     } finally {
       setIsScreenLoading(false);
     }
@@ -368,7 +365,7 @@ function App() {
                         </span>
                       </div>
                     </td>
-                    <td className="text-end">{cartItem.total}</td>
+                    <td className="text-end">{FormatNumber(cartItem.total)}</td>
                   </tr>
                 )
               })}
@@ -378,7 +375,7 @@ function App() {
                 <td colSpan="3" className="text-end">
                   總計：
                 </td>
-                <td className="text-end" style={{ width: "130px" }}>{cart.total}</td>
+                <td className="text-end" style={{ width: "130px" }}>{FormatNumber(cart.total)}</td>
               </tr>
             </tfoot>
           </table>
@@ -491,7 +488,7 @@ function App() {
             ></textarea>
           </div>
           <div className="text-end">
-            <button type="submit" className="btn btn-danger">
+            <button type="submit" className="btn btn-danger" disabled={cart.carts?.length === 0 && true}>
               送出訂單
             </button>
           </div>
