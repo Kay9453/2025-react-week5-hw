@@ -35,6 +35,7 @@ function App() {
       try {
         const res = await axios.get(`${BASE_URL}/v2/api/${API_PATH}/products`);
         setProducts(res.data.products);
+        console.log(res.data.products);
       } catch (error) {
         alert("取得產品失敗");
       } finally {
@@ -63,6 +64,7 @@ function App() {
 
   const handleSeeMore = (product) => {
     setTempProduct(product);
+    setQtySelect(1);
     openModal();
   };
 
@@ -214,7 +216,7 @@ function App() {
                 <td>{product.title}</td>
                 <td>
                   <del className="h6">原價 {product.origin_price} 元</del>
-                  <div className="h5">特價 {product.origin_price}元</div>
+                  <div className="h5">特價 {product.price}元</div>
                 </td>
                 <td>
                   <div className="btn-group btn-group-sm">
@@ -253,7 +255,7 @@ function App() {
             <div className="modal-content">
               <div className="modal-header">
                 <h2 className="modal-title fs-5">
-                  產品名稱：{tempProduct.title}
+                  {tempProduct.title}
                 </h2>
                 <button
                   onClick={closeModal}
