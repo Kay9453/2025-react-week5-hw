@@ -35,7 +35,6 @@ function App() {
       try {
         const res = await axios.get(`${BASE_URL}/v2/api/${API_PATH}/products`);
         setProducts(res.data.products);
-        console.log(res.data.products);
       } catch (error) {
         alert("取得產品失敗");
       } finally {
@@ -186,7 +185,11 @@ function App() {
       reset();
       getCart();
     } catch (error) {
-      alert('結帳失敗!')
+      if ( error.response.data.message === "購物車內無資料"){
+        alert('結帳失敗，請將商品加入購物車!')
+      } else {
+        alert('結帳失敗!')
+      }
     } finally {
       setIsScreenLoading(false);
     }
@@ -401,7 +404,7 @@ function App() {
               id="email"
               type="email"
               className={`form-control ${errors.email && 'is-invalid' }`}
-              placeholder="請輸入 Email"
+              placeholder="xxx@xxx.xxx"
             />
 
             {
@@ -450,7 +453,7 @@ function App() {
               id="tel"
               type="text"
               className={`form-control ${errors.tel && 'is-invalid' }`}
-              placeholder="請輸入電話"
+              placeholder="請輸入手機號碼或市話"
             />
             {
               errors.tel && <p className="text-danger my-2">{errors.tel.message}</p>
