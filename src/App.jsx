@@ -295,7 +295,13 @@ function App() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" onClick={()=>{addCartItem(tempProduct.id,qtySelect)}} disabled={isLoading} className="btn btn-primary d-flex align-items-center gap-2">
+                <button type="button" 
+                  onClick={()=>{
+                    addCartItem(tempProduct.id,qtySelect);
+                    closeModal();
+                  }} 
+                  disabled={isLoading} 
+                  className="btn btn-primary d-flex align-items-center gap-2">
                   加入購物車
                   {
                     isLoading && <ReactLoading
@@ -448,7 +454,7 @@ function App() {
                 }
               })}
               id="tel"
-              type="text"
+              type="tel"
               className={`form-control ${errors.tel && 'is-invalid' }`}
               placeholder="請輸入手機號碼或市話"
             />
